@@ -5,14 +5,15 @@ using ReceitaWsSample.Models;
 
 namespace ReceitaWsSample.Context
 {
+    [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class DatabaseContext : DbContext
     {
+        public DbSet<CadastroPessoaJuridica> CadastrosPessoaJuridica { get; set; }
+
         public DatabaseContext () : base("AppConnectionString")
         {
 
         }
-
-        public DbSet<CadastroPessoaJuridica> CadastrosPessoaJuridica { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
