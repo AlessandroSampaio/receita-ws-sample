@@ -37,9 +37,17 @@ namespace ReceitaWsSample.Controllers
                     {
                         // Consulta o CNPJ na API
                         cnpjModel = _service.ConsultaWs(cnpj);
-                        cnpjModel.DataInclusao = DateTime.Now;
-
-                        _service.Insere(cnpjModel);
+                        
+                        // Testa se a API retornou dados
+                        if(!string.IsNullOrEmpty(cnpjModel.Cnpj))
+                        {
+                            cnpjModel.DataInclusao = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "E. South America Standard Time");
+                            _service.Insere(cnpjModel);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index");
+                        }
                     }
                 }
                 catch (Exception)
