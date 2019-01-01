@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form action="~/Home/Consulta" method="get" onsubmit="return isValidData()">
+                <div class="form-group has-danger">
+                    <input type="text" class="form-control" id="cnpj" name="cnpj" placeholder="Digite um CNPJ válido">
+                    <div class="invalid-feedback">Este CNPJ parece ser inválido, dá uma revisada ae!</div>
+                    <div class="valid-feedback">Buscando... aguarde alguns instantes</div>
+                </div>
+
+                <button type="submit" id="buscar" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+    </div>
+</div>

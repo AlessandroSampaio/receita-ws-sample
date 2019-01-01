@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - ReceitaWS Sample</title>
+    
+        <!-- CSS -->
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    
+        <!-- JS -->
+        <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    </head>
+    <body>
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="~/Home/Index">ReceitaWS Sample</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+        <!-- ./navbar-->
+
+        <br/>
+
+        <div class="container body-content">
+            <!-- content -->
+            @RenderBody()
+            <!-- ./content -->
+        </div>
+
+        <!-- JS -->
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+
+        <!--jQuery Mask Plugin -->
+        <script src="~/Scripts/jquery.mask.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                // Aplica máscara ao campo de CNPJ
+                $("#cnpj").mask('00.000.000/0000-00', { reverse: true });
+            });
+
+            // Efetua uma validação mínima no CNPJ digitado
+            function isValidData()
+            {
+                var cnpjValue = $("#cnpj").val();
+                var invalidClass = "is-invalid";
+                var validClass = "is-valid";
+
+                if (cnpjValue.trim().length == 0 || cnpjValue.trim().length != 18) {
+                    $("#cnpj").removeClass(validClass);
+                    $("#cnpj").addClass(invalidClass);
+
+                    return false;
+                }
+                else {
+                    $("#cnpj").removeClass(invalidClass);
+                    $("#cnpj").addClass(validClass);
+
+                    return true;
+                }
+            }
+        </script>
+    </body>
+</html>
