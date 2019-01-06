@@ -137,13 +137,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901011605324_FirstMigration.cs" />
-    <Compile Include="Migrations\201901011605324_FirstMigration.Designer.cs">
-      <DependentUpon>201901011605324_FirstMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901060042119_ImplementandoSocios.cs" />
-    <Compile Include="Migrations\201901060042119_ImplementandoSocios.Designer.cs">
-      <DependentUpon>201901060042119_ImplementandoSocios.cs</DependentUpon>
+    <Compile Include="Migrations\201901060114381_PrimeiraMigration.cs" />
+    <Compile Include="Migrations\201901060114381_PrimeiraMigration.Designer.cs">
+      <DependentUpon>201901060114381_PrimeiraMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CadastroPessoaJuridica.cs" />
@@ -172,11 +168,8 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901011605324_FirstMigration.resx">
-      <DependentUpon>201901011605324_FirstMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901060042119_ImplementandoSocios.resx">
-      <DependentUpon>201901060042119_ImplementandoSocios.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901060114381_PrimeiraMigration.resx">
+      <DependentUpon>201901060114381_PrimeiraMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

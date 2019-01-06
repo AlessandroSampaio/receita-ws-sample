@@ -3,7 +3,7 @@ namespace ReceitaWsSample.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class FirstMigration : DbMigration
+    public partial class PrimeiraMigration : DbMigration
     {
         public override void Up()
         {
@@ -30,10 +30,26 @@ namespace ReceitaWsSample.Migrations
                     })
                 .PrimaryKey(t => t.ID);
             
+            CreateTable(
+                "dbo.SocioAdministrador",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        Nome = c.String(unicode: false),
+                        Ocupacao = c.String(unicode: false),
+                        CadastroPessoaJuridica_ID = c.Int(),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.CadastroPessoaJuridica", t => t.CadastroPessoaJuridica_ID)
+                .Index(t => t.CadastroPessoaJuridica_ID);
+            
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.SocioAdministrador", "CadastroPessoaJuridica_ID", "dbo.CadastroPessoaJuridica");
+            DropIndex("dbo.SocioAdministrador", new[] { "CadastroPessoaJuridica_ID" });
+            DropTable("dbo.SocioAdministrador");
             DropTable("dbo.CadastroPessoaJuridica");
         }
     }
