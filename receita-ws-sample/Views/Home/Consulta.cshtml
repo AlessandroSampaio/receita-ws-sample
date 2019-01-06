@@ -1,10 +1,14 @@
 ﻿@model ReceitaWsSample.Models.CadastroPessoaJuridica
 
 @{
-    ViewBag.Title = Model.NomeFantasia;
+    ViewBag.Title = Model.RazaoSocial;
 }
 
 <div class="container">
+    <a href="~/Home/Index" class="btn btn-primary">Voltar</a>
+
+    <br/><br/>
+
     <div class="row">
         <div class="col-lg-12">
             <div class="page-header">
@@ -55,7 +59,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="UltimaAtualizacao">Última atualização</label>
-                <input type="text" class="form-control" id="UltimaAtualizacao" value="@Model.UltimaAtualizacao" readonly="readonly">
+                <input type="text" class="form-control" id="UltimaAtualizacao" value="@Model.UltimaAtualizacao.ToString("dd/MM/yyyy HH:mm:ss")" readonly="readonly">
             </div>
         </div>
     </div>
@@ -118,8 +122,32 @@
         </div>  
     </div>
 
-    <hr />
+    <br/>
 
-    <a href="~/Home/Index" class="btn btn-primary">Voltar</a>
+    <div class="page-header">
+        <h5>Quadro de sócios e administradores</h5>
+    </div>
+
+    <br/>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Ocupação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var socio in Model.Socios)
+            {
+                <tr class="table-light">
+                    <td>@socio.Nome</td>
+                    <td>@socio.Ocupacao</td>
+                </tr>
+            }
+        </tbody>
+    </table> 
+
+    <hr />
 </div>
 

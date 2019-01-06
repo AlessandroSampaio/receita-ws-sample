@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using System.Net;
 
-using ReceitaWsSample.Context;
 using ReceitaWsSample.Models;
 using ReceitaWsSample.Services;
 
@@ -31,7 +28,7 @@ namespace ReceitaWsSample.Controllers
                 try
                 {
                     // Consulta o CNPJ no banco de dados
-                    cnpjModel = _service.Consulta(cnpj);
+                    cnpjModel = _service.Consulta(cnpj.ToCnpjFormat());
 
                     if (cnpjModel == null)
                     {
@@ -42,17 +39,28 @@ namespace ReceitaWsSample.Controllers
                         if(!string.IsNullOrEmpty(cnpjModel.Cnpj))
                         {
                             cnpjModel.DataInclusao = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "E. South America Standard Time");
-                            _service.Insere(cnpjModel);
+
+                            if (cnpjModel.Socios.Count != 0)
+                            {
+                                foreach (var socio in cnpjModel.Socios)
+                                    socio.CadastroPessoaJuridica = cnpjModel;
+
+                                _service.Insere(cnpjModel, true);
+                            }
+                            else
+                            {
+                                _service.Insere(cnpjModel);
+                            }
                         }
                         else
                         {
-                            return RedirectToAction("Index");
+                            return HttpNotFound("O CNPJ informado não foi encontrado");
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    return RedirectToAction("Index");
+                    return new HttpStatusCodeResult(HttpStatusCode.Conflict, e.Message);
                 }
 
                 return View(cnpjModel);

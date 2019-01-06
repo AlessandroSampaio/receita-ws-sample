@@ -9,8 +9,9 @@ namespace ReceitaWsSample.Context
     public class DatabaseContext : DbContext
     {
         public DbSet<CadastroPessoaJuridica> CadastrosPessoaJuridica { get; set; }
+        public DbSet<SocioAdministrador> SociosAdministradores { get; set; }
 
-        public DatabaseContext () : base("AppConnectionString")
+        public DatabaseContext () : base("LocalConnectionString")
         {
 
         }

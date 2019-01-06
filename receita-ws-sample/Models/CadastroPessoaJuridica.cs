@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Newtonsoft.Json;
 
@@ -50,6 +51,14 @@ namespace ReceitaWsSample.Models
         [JsonProperty("tipo")]
         public string Tipo { get; set; }
 
+        [JsonProperty("qsa")]
+        public ICollection<SocioAdministrador> Socios { get; set; } 
+
         public DateTime DataInclusao { get; set; }
+
+        public CadastroPessoaJuridica ()
+        {
+            Socios = new List<SocioAdministrador>();
+        }
     }
 }

@@ -13,15 +13,16 @@ namespace ReceitaWsSample.Services
     public class CadastroPessoaJuridicaService
     {
         private DatabaseContext _context = new DatabaseContext();
+        private SocioAdministradorService _socioService = new SocioAdministradorService();
 
         public ICollection<CadastroPessoaJuridica> Consulta ()
         {
-            return _context.CadastrosPessoaJuridica.ToList();
+            return _context.CadastrosPessoaJuridica.Include("Socios").ToList();
         }
 
         public CadastroPessoaJuridica Consulta (string cnpj)
         {
-            return _context.CadastrosPessoaJuridica.Where(x => x.Cnpj.Equals(cnpj)).FirstOrDefault();
+            return _context.CadastrosPessoaJuridica.Include("Socios").Where(x => x.Cnpj.Equals(cnpj)).FirstOrDefault();
         }
 
         public CadastroPessoaJuridica ConsultaWs (string cnpj)
@@ -45,6 +46,11 @@ namespace ReceitaWsSample.Services
         {
             _context.CadastrosPessoaJuridica.Add(model);
             _context.SaveChanges();
+        }
+
+        public void Insere (CadastroPessoaJuridica model, bool insereSocios)
+        {
+            _socioService.Insere(model.Socios);
         }
     }
 }
