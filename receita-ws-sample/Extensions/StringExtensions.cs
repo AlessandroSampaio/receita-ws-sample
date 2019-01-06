@@ -7,7 +7,7 @@ namespace System
         public static string Cut (this String obj)
         {
             if (obj.Length >= 15)
-                return obj.Substring(0, 15);
+                return obj.Substring(0, 15) + "...";
             else
                 return obj;
         }
