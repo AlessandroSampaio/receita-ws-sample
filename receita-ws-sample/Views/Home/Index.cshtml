@@ -18,4 +18,42 @@
             </form>
         </div>
     </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <h2>Dados armazenados: @Model.CadastrosPessoaJuridica.Count</h2>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Razão social</th>
+                <th scope="col">Nome fantasia</th>
+                <th scope="col">CNPJ</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Inclusão</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cadastro in Model.CadastrosPessoaJuridica)
+            {
+                <tr class="table-light">
+                    <td title="@cadastro.RazaoSocial">@cadastro.RazaoSocial.Cut()</td>
+                    <td title="@cadastro.NomeFantasia">@cadastro.NomeFantasia.Cut()</td>
+                    <td>@cadastro.Cnpj</td>
+                    <td>@cadastro.Tipo</td>
+                    <td>@cadastro.DataInclusao.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                    <td><a href="Consulta?cnpj=@cadastro.Cnpj" class="btn btn-info btn-sm">Detalhes</a></td>
+                </tr>
+            }
+        </tbody>
+    </table> 
 </div>

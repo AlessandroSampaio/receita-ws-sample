@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using System.Net;
 
 using ReceitaWsSample.Models;
+using ReceitaWsSample.Models.ViewModel;
 using ReceitaWsSample.Services;
 
 namespace ReceitaWsSample.Controllers
@@ -14,7 +15,8 @@ namespace ReceitaWsSample.Controllers
         // GET: Home/Index
         public ActionResult Index()
         {
-            return View();
+            var viewModel = new HomeViewModel { CadastrosPessoaJuridica = _service.Consulta() };
+            return View(viewModel);
         }
 
         // GET: Home/Consulta
